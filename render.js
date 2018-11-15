@@ -1,7 +1,6 @@
  function render(row) {
  	var pitch = new Pitch(cvs);
  	pitch.draw(ctx);
- 	console.log(row);
  	start = 3;
  	for (var i = 0; i < numCircles; i++) {
  		var circle = circles[i];
@@ -38,14 +37,43 @@
  	return data;
  }
 
+ var output = $('h1');
+ var time = 0;
+ var isPaused = false;
+ var playSpeed = 40;
+ var changeSpeed = 40;
+ var playDirection = 1;
+
  function animate(data) {
  	setInterval(function () {
- 		render(data[index]);
- 		index++;
- 	}, 5);
+ 		if (!isPaused) {
+ 			render(data[index]);
+ 			index = index + 1 * playDirection;
+ 			output.text("Seconds: " + index / 25);
+			playSpeed = changeSpeed;
+ 		}
+ 	}, playSpeed);
  }
 
  var data = getCSV()
  var index = 0;
 
  animate(data)
+
+ // 再生機能  ボタンとか
+ //with jquery
+ $('.pause').on('click', function (e) {
+ 	e.preventDefault();
+ 	isPaused = true;
+ });
+
+ $('.play').on('click', function (e) {
+ 	e.preventDefault();
+ 	isPaused = false;
+ });
+
+ $('.fforward').on('click', function (e) {
+ 	e.preventDefault();
+ 	changeSpeed = changeSpeed * 2;
+ });
+
