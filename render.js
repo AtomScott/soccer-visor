@@ -7,6 +7,7 @@
     seekbar.drawRedLine(ctx2, time);
    
  	//console.log(row);
+
  	start = 3;
  	for (var i = 0; i < numCircles; i++) {
  		var circle = circles[i];
@@ -43,13 +44,24 @@
  	return data;
  }
 
+ var output = $('h1');
+ var time = 0;
+ var isPaused = false;
+ var playSpeed = 40;
+ var changeSpeed = 40;
+ var playDirection = 1;
+
  function animate(data) {
  	setInterval(function () {
- 		render(data[index]);
- 		index++;
-        console.log(data.length, time);
-        time = index * 0.04 * cvs2.width / data.length;
- 	}, 0.01);
+
+ 		if (!isPaused) {
+ 			render(data[index]);
+ 			index = index + 1 * playDirection;
+      time = index * 0.04 * cvs2.width / data.length;
+ 			output.text("Seconds: " + index / 25);
+			playSpeed = changeSpeed;
+ 		}
+ 	}, playSpeed);
  }
 
  var data = getCSV();
@@ -65,4 +77,23 @@
  animate(data);
  // var index = 0;
 
- // animate(data)
+
+ animate(data)
+
+ // 再生機能  ボタンとか
+ //with jquery
+ $('.pause').on('click', function (e) {
+ 	e.preventDefault();
+ 	isPaused = true;
+ });
+
+ $('.play').on('click', function (e) {
+ 	e.preventDefault();
+ 	isPaused = false;
+ });
+
+ $('.fforward').on('click', function (e) {
+ 	e.preventDefault();
+ 	changeSpeed = changeSpeed * 2;
+ });
+
