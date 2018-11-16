@@ -1,7 +1,12 @@
  function render(row) {
  	var pitch = new Pitch(cvs);
  	pitch.draw(ctx);
- 	console.log(row);
+   
+    var seekbar = new Seekbar(cvs2, time);
+    seekbar.drawA(ctx2);
+    seekbar.drawRedLine(ctx2, time);
+   
+ 	//console.log(row);
  	start = 3;
  	for (var i = 0; i < numCircles; i++) {
  		var circle = circles[i];
@@ -23,7 +28,7 @@
  function getCSV() {
  	var data = []
  	var req = new XMLHttpRequest();
- 	req.open("get", "sample.csv", true);
+ 	req.open("get", "sample2.csv", true);
  	req.send(null);
 
  	req.onload = function () {
@@ -42,10 +47,22 @@
  	setInterval(function () {
  		render(data[index]);
  		index++;
- 	}, 5);
+        console.log(data.length, time);
+        time = index * 0.04 * cvs2.width / data.length;
+ 	}, 0.01);
  }
 
- var data = getCSV()
- var index = 0;
+ var data = getCSV();
+ //var csv = document.createElement("csv");
+ //csv.addEventListener("load", onLoad);
 
- animate(data)
+ var index = 0;
+ var time = 0;
+ 
+ var rate = 1;
+
+
+ animate(data);
+ // var index = 0;
+
+ // animate(data)
