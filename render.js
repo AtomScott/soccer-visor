@@ -1,11 +1,11 @@
  function render(row) {
  	var pitch = new Pitch(cvs);
  	pitch.draw(ctx);
-   
+
     var seekbar = new Seekbar(cvs2, time);
     seekbar.drawA(ctx2);
     seekbar.drawRedLine(ctx2, time);
-   
+
  	//console.log(row);
 
  	start = 3;
@@ -46,22 +46,27 @@
 
  var output = $('h1');
  var time = 0;
- var isPaused = false;
+ var flag = 'play';
  var playSpeed = 40;
  var changeSpeed = 40;
  var playDirection = 1;
+ var animation;
+ function animate(data, flag, playSpeed) {
+   switch(flag) {
+  case 'play':
+    animation = setInterval(function () {
+        render(data[index]);
+        index = index + 1 * playDirection;
+        time = index * 0.04 * cvs2.width / data.length;
+        output.text("Seconds: " + index / 25);
+        playSpeed = changeSpeed;
+    }, playSpeed);
+      break;
+  case 'pause':
+      clearInterval(animation)
+      break;
+}
 
- function animate(data) {
- 	setInterval(function () {
-
- 		if (!isPaused) {
- 			render(data[index]);
- 			index = index + 1 * playDirection;
-      time = index * 0.04 * cvs2.width / data.length;
- 			output.text("Seconds: " + index / 25);
-			playSpeed = changeSpeed;
- 		}
- 	}, playSpeed);
  }
 
  var data = getCSV();
@@ -70,30 +75,37 @@
 
  var index = 0;
  var time = 0;
- 
+
  var rate = 1;
 
 
- animate(data);
+ animate(data,flag,playSpeed);
  // var index = 0;
-
-
- animate(data)
 
  // 再生機能  ボタンとか
  //with jquery
  $('.pause').on('click', function (e) {
  	e.preventDefault();
- 	isPaused = true;
+ 	flag = 'pause';
+  clearInterval(animation)
+  animate(data,flag,playSpeed);
  });
 
  $('.play').on('click', function (e) {
  	e.preventDefault();
- 	isPaused = false;
+  flag = 'play';
+  animate(data,flag,playSpeed);
  });
 
- $('.fforward').on('click', function (e) {
+ $('.faster').on('click', function (e) {
  	e.preventDefault();
- 	changeSpeed = changeSpeed * 2;
+ 	playSpeed = playSpeed * 0.5;
+  clearInterval(animation)
+  animate(data,flag,playSpeed);
  });
-
+ $('.slower').on('click', function (e) {
+ 	e.preventDefault();
+ 	playSpeed = playSpeed * 2;
+  clearInterval(animation)
+  animate(data,flag,playSpeed);
+ });
