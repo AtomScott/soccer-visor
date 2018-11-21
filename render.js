@@ -1,13 +1,15 @@
  function render(row) {
  	var pitch = new Pitch(cvs);
  	pitch.draw(ctx);
-
-    var seekbar = new Seekbar(cvs2, time);
+   
+    ctx2.clearRect(0, 0, cvs2.width, cvs2.height);
+    // var seekbar = new Seekbar(cvs2, time);
+    if(!seekbar.isDragged){
+      seekbar.x = time;
+    }
     seekbar.drawA(ctx2);
-    seekbar.drawRedLine(ctx2, time);
-
- 	//console.log(row);
-
+    seekbar.drawRedLine(ctx2);
+   
  	start = 3;
  	for (var i = 0; i < numCircles; i++) {
  		var circle = circles[i];
@@ -46,66 +48,51 @@
 
  var output = $('h1');
  var time = 0;
- var flag = 'play';
+ var isPaused = false;
  var playSpeed = 40;
  var changeSpeed = 40;
  var playDirection = 1;
- var animation;
- function animate(data, flag, playSpeed) {
-   switch(flag) {
-  case 'play':
-    animation = setInterval(function () {
-        render(data[index]);
-        index = index + 1 * playDirection;
-        time = index * 0.04 * cvs2.width / data.length;
-        output.text("Seconds: " + index / 25);
-        playSpeed = changeSpeed;
-    }, playSpeed);
-      break;
-  case 'pause':
-      clearInterval(animation)
-      break;
-}
 
+
+ var seekbar = new Seekbar(cvs2);
+
+ function animate(data) {
+ 	setInterval(function () {
+
+ 		if (!isPaused) {
+ 			render(data[index]);
+ 			index = index + 1 * playDirection;
+            time = index * 0.04 * cvs2.width / data.length;
+ 			output.text("Seconds: " + index / 25);
+			playSpeed = changeSpeed;
+ 		}
+ 	}, playSpeed);
  }
 
  var data = getCSV();
  //var csv = document.createElement("csv");
  //csv.addEventListener("load", onLoad);
 
- var index = 0;
- var time = 0;
-
+ var index = 0; 
  var rate = 1;
 
-
- animate(data,flag,playSpeed);
+ animate(data);
  // var index = 0;
 
  // 再生機能  ボタンとか
  //with jquery
  $('.pause').on('click', function (e) {
  	e.preventDefault();
- 	flag = 'pause';
-  clearInterval(animation)
-  animate(data,flag,playSpeed);
+ 	isPaused = true;
  });
 
  $('.play').on('click', function (e) {
  	e.preventDefault();
-  flag = 'play';
-  animate(data,flag,playSpeed);
+ 	isPaused = false;
  });
 
- $('.faster').on('click', function (e) {
+ $('.fforward').on('click', function (e) {
  	e.preventDefault();
- 	playSpeed = playSpeed * 0.5;
-  clearInterval(animation)
-  animate(data,flag,playSpeed);
+ 	changeSpeed = changeSpeed * 2;
  });
- $('.slower').on('click', function (e) {
- 	e.preventDefault();
- 	playSpeed = playSpeed * 2;
-  clearInterval(animation)
-  animate(data,flag,playSpeed);
- });
+
