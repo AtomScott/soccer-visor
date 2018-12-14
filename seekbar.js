@@ -10,10 +10,6 @@ function Seekbar(cvs2){
   var length = cvs2.width;
   var height = cvs2.height;
 
-  this.drawA = function(ctx2){
-    ctx2.strokeStyle = "black";
-    ctx2.strokeRect(0, 0, length, 100);
-  };
 
   this.drawRedLine = function(ctx2){
     ctx2.lineWidth = 2;
@@ -22,6 +18,7 @@ function Seekbar(cvs2){
     ctx2.moveTo(me.x, 0);
     ctx2.lineTo(me.x, height);
     ctx2.stroke();
+      ctx2.closePath();
   };
 
   window.addEventListener("mousedown", function(e){
