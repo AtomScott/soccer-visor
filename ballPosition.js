@@ -64,8 +64,8 @@ function BallPosition(cvs2){
   }
   this.draw = function(ctx2){ 
     ctx2.strokeStyle = "black";
-    ctx2.strokeRect(0, 100, cvs2.width, 100);
-    ctx2.putImageData(imagedata, 0, 100);
+    ctx2.strokeRect(0, 0, cvs2.width, 100);
+    ctx2.putImageData(imagedata, 0, 0);
   };
 }
     
