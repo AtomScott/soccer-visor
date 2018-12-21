@@ -4,6 +4,7 @@ function render(row) {
     pitch.draw(ctx);
     ctx2.clearRect(0, 0, cvs2.width, cvs2.height);
     ballPosition.draw(ctx2);
+    horizon.draw(ctx2);
 
     if(!seekbar.isDragged){
       seekbar.x = time;
@@ -113,6 +114,7 @@ var time_display = $('#timeDisplay');
 var speed_display = $('#speedDisplay');
 var time = 0;
 var flag = 'play';
+var once = 0;
 var playSpeed = 25;
 var playDirection = 1;
 var animation;
@@ -122,13 +124,23 @@ var seekbar = new Seekbar(cvs2);
 var timebar = new timebar(cvs2);
 var boxA = new boxA(cvs2);
 var data = getCSV("sample2.csv");
-console.log(data);
 
+/*
 window.addEventListener("keydown", function(){
   ballPosition = new BallPosition(cvs2);
-    clearInterval(animation)
-  animate(data,flag,playSpeed);
+  horizon = new Horizon(cvs2);
+  //clearInterval(animation)
+  //animate(data,flag,playSpeed);
 });
+*/
+
+$('.start').on('click', function(e) {
+  if(once == 0){
+    ballPosition = new BallPosition(cvs2);
+    horizon = new Horizon(cvs2);
+    once = 1;
+  }
+})
 
 /*　Buttons */
 $('.pause').on('click', function (e) {
