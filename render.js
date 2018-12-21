@@ -57,11 +57,33 @@ ctx.beginPath();
 
   }
     }
-    if ($('#delCheck').is(':checked')){
-  ctx.beginPath();
-  for (var i = 0, n = links.length; i < n; ++i) drawLink(links[i]);
-  ctx.strokeStyle = "rgba(255.0,255.0,0,0.5)";
-  ctx.stroke();
+    if ($('#delCheck').is(':checked')) {
+        var half_length = Math.ceil(newRow.length / 2);
+        var leftSide = newRow.splice(0, half_length);
+        var diagram = voronoi(leftSide),
+            links = diagram.links();
+
+        ctx.strokeStyle = "rgba(0.0,0.0,255.0,0.5)";
+        ctx.beginPath();
+        for (var i = 0, n = links.length; i < n; ++i) {
+            drawLink(links[i]);
+        }
+        ctx.stroke();
+        ctx.closePath();
+        
+        var rightSide = newRow;
+        var diagram = voronoi(rightSide),
+            links = diagram.links();
+        
+        ctx.strokeStyle = "rgba(255.0,0.0,0,0.5)";
+        console.log(ctx.strokeStyle);
+        ctx.beginPath();
+        for (var i = 0, n = links.length; i < n; ++i) {
+            drawLink(links[i]);
+        }
+        ctx.stroke();
+        ctx.closePath();
+
     }
     /* Voronoi etc.ここまで*/
     
