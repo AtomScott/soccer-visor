@@ -5,7 +5,6 @@
 ## Introduction
 
 Animator is a animation tool to make research using football tracking data easier.
-The tool itself can be accessed via `</SoccerNN/animator/index.html>`_
 
 The current version of animator consists of two 5 major components.
 
