@@ -11,7 +11,7 @@ Sooccer Visor is a tool, created by myself and Kaito Yamagata, used to visualise
 
 # Soccer-Visor 0.2
 
-![](animator/soccer-visor-dashboard.png)
+![Dashboard](animator/soccer-visor-dashboard.png)
 
 ## Introduction
 
@@ -47,6 +47,6 @@ The current version of animator consists of two 5 major components.
 - tool.js
     Static functions that can be called by any object are put in here.
 
-![](animator/soccer-visor-overview.png)
+![Overview](animator/soccer-visor-overview.png)
 
 
