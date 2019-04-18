@@ -4,8 +4,10 @@ Modified: 2010-12-05 19:30
 Category: projects
 Tags: 
 Slug: soccer-visor/tree/master/animator
-Authors: Alexis Metaireau, Conan Doyle
+Authors: Atom Scott, Kaito Yamagata
 Summary: 
+
+Sooccer Visor is a tool, created by myself and Kaito Yamagata, used to visualise data in Football.
 
 # Soccer-Visor 0.2
 
