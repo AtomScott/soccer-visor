@@ -3,7 +3,7 @@ Date: 2019-01-01
 Modified: 2010-12-05 19:30
 Category: projects
 Tags: 
-Slug: soccer-visor/animator
+Slug: soccer-visor/tree/master/animator
 Authors: Alexis Metaireau, Conan Doyle
 Summary: 
 
