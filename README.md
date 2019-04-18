@@ -1,9 +1,9 @@
-Title: soccer-visor
+Title: Soccer Visor
 Date: 2019-01-01 
 Modified: 2010-12-05 19:30
 Category: projects
 Tags: 
-Slug: soccer-visor/tree/master/animator
+Slug: soccer-visor
 Authors: Atom Scott, Kaito Yamagata
 Summary: 
 
