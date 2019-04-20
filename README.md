@@ -2,8 +2,8 @@ Title: Soccer Visor
 Date: 2019-01-01 
 Modified: 2010-12-05 19:30
 Category: projects
-Tags: 
-img : https://github.com/AtomScott/soccer-visor/blob/master/img.jpg?raw=true
+Tags: None
+img: https://github.com/AtomScott/soccer-visor/blob/master/img.jpg?raw=true
 link: https://github.com/AtomScott/soccer-visor
 Authors: Atom Scott, Kaito Yamagata
 Summary: 
